@@ -27,7 +27,7 @@ services:
     environment:
       - POSTGRES_DB=keycloak
       - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD=keycloak
+      - POSTGRES_PASSWORD=senha_forte_db
 
 volumes:
   keycloak_db_data:
