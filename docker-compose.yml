@@ -33,6 +33,7 @@ services:
       - --hostname-strict=false
       - --hostname-strict-https=false
       - --spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true
+      - --http-relative-path=/
       - --hostname-url=${KEYCLOAK_HOSTNAME_URL}
     depends_on:
       - postgres
