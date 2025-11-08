@@ -1,4 +1,19 @@
+version: "3.9"
+
 services:
+  postgres:
+    image: postgres:16
+    container_name: keycloak_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - fiware
+
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.2
     container_name: keycloak
@@ -25,3 +40,11 @@ services:
       - keycloak_data:/opt/keycloak/data
     networks:
       - fiware
+
+volumes:
+  postgres_data:
+  keycloak_data:
+
+networks:
+  fiware:
+    external: true
