@@ -12,7 +12,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - fiware
+      - fiware_default
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.2
@@ -39,8 +39,12 @@ services:
     volumes:
       - keycloak_data:/opt/keycloak/data
     networks:
-      - fiware
+      - fiware_default
 
 volumes:
   postgres_data:
   keycloak_data:
+
+networks:
+  fiware_default:
+    external: true
