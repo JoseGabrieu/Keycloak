@@ -4,6 +4,7 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     container_name: keycloak
+    command: start-dev
     ports:
       - "8080:8080"
     environment:
@@ -16,6 +17,8 @@ services:
       - KC_DB_PASSWORD=senha_forte_db
       - KC_HTTP_ENABLED=true
       - KC_HOSTNAME=${KEYCLOAK_HOSTNAME_URL}
+      - KC_HOSTNAME_STRICT=false
+      - KC_PROXY=edge
     depends_on:
       - db
 
