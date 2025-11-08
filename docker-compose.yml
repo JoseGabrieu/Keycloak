@@ -32,7 +32,6 @@ services:
       - start-dev
       - --hostname-strict=false
       - --hostname-strict-https=false
-      - --http-enabled=true
       - --spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true
       - --http-relative-path=/
       - --hostname-url=${KEYCLOAK_HOSTNAME_URL}
