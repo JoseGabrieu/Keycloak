@@ -28,7 +28,7 @@ services:
       KC_DB_PASSWORD: keycloak123
       KC_DB_SCHEMA: public
       KEYCLOAK_HOSTNAME_URL: ${KEYCLOAK_HOSTNAME_URL}
-      KC_HTTP_ENABLED: "true"
+      KC_HTTP_ENABLED: ${KEYCLOAK_HTTP_ENABLED}
     command:
       - start-dev
       - --hostname-strict=false
