@@ -31,6 +31,8 @@ services:
     command:
       - start-dev
       - --hostname-strict=false
+      - --hostname-strict-https=false
+      - --spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true
       - --hostname-url=${KEYCLOAK_HOSTNAME_URL}
     depends_on:
       - postgres
