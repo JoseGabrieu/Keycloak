@@ -11,8 +11,7 @@ services:
       - start-dev
       - --http-enabled=true
       - --hostname-strict=false
-      - --hostname-strict-https=false
-      - --http-relative-path=/
+      - --hostname=${KEYCLOAK_HOSTNAME_URL}
     ports:
       - "8080:8080"
     restart: unless-stopped
