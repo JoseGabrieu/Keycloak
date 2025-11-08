@@ -30,6 +30,7 @@ services:
       KEYCLOAK_HOSTNAME_URL: ${KEYCLOAK_HOSTNAME_URL}
     command:
       - start-dev
+      - --http-enabled=true
       - --hostname-strict=false
       - --hostname-strict-https=false
       - --spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true
@@ -41,7 +42,6 @@ services:
       - "8080:8080"
     volumes:
       - keycloak_data:/opt/keycloak/data
-      - ./conf/keycloak.conf:/opt/keycloak/conf/keycloak.conf
     networks:
       - fiware_default
 
