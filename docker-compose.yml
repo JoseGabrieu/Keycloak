@@ -1,36 +1,52 @@
-version: '3.8'
+version: "3.9"
 
 services:
+  postgres:
+    image: postgres:16
+    container_name: keycloak_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - keycloak_net
+
   keycloak:
-    image: quay.io/keycloak/keycloak:latest
+    image: quay.io/keycloak/keycloak:24.0.2
     container_name: keycloak
-    command: start-dev
+    restart: always
+    command:
+      - start
+      - --http-enabled=true
+      - --http-port=8080
+      - --hostname-strict=false
+      - --hostname-strict-https=false
+      - --hostname=${KEYCLOAK_HOSTNAME_URL}
+      - --hostname-url=${KEYCLOAK_HOSTNAME_URL}:8080
+      - --db=postgres
+      - --db-username=keycloak
+      - --db-password=keycloak123
+      - --db-url-host=postgres
+      - --db-schema=public
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    depends_on:
+      - postgres
     ports:
       - "8080:8080"
-    environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=senha_forte_admin
-      - KC_DB=postgres
-      - KC_DB_URL_HOST=db
-      - KC_DB_URL_DATABASE=keycloak
-      - KC_DB_USERNAME=keycloak
-      - KC_DB_PASSWORD=senha_forte_db
-      - KC_HTTP_ENABLED=true
-      - KC_HOSTNAME=http://98.95.40.70:8080
-      - KC_HOSTNAME_STRICT=false
-      - KC_PROXY=edge
-    depends_on:
-      - db
-
-  db:
-    image: postgres:15
-    container_name: keycloak_db
     volumes:
-      - keycloak_db_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=keycloak
-      - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD=senha_forte_db
+      - keycloak_data:/opt/keycloak/data
+    networks:
+      - keycloak_net
 
 volumes:
-  keycloak_db_data:
+  postgres_data:
+  keycloak_data:
+
+networks:
+  keycloak_net:
+    driver: bridge
