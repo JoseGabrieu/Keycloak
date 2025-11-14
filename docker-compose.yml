@@ -20,15 +20,16 @@ services:
     container_name: keycloak
     restart: always
 
-    command: >
-      start-dev
-      --hostname=${KEYCLOAK_HOSTNAME}
-      --hostname-strict=false
-      --hostname-strict-https=false
-      --https-enabled=true
-      --https-port=8443
-      --https-certificate-file=/opt/keycloak/certs/server.crt
-      --https-certificate-key-file=/opt/keycloak/certs/server.key
+    command:
+      - start-dev
+      - --health-enabled=true
+      - --transaction-xa-enabled=false
+      - --hostname-strict=false
+      - --hostname-strict-https=false
+      - --hostname=${KEYCLOAK_HOSTNAME}
+      - --https-port=8443
+      - --https-certificate-file=/opt/keycloak/certs/server.crt
+      - --https-certificate-key-file=/opt/keycloak/certs/server.key
 
     environment:
       KEYCLOAK_ADMIN: admin
@@ -38,8 +39,8 @@ services:
       - postgres
 
     ports:
-      - "8080:8080"
-      - "8443:8443"
+      - "8080:8080"   # HTTP
+      - "8443:8443"   # HTTPS
 
     volumes:
       - /opt/keycloak/certs:/opt/keycloak/certs:ro
