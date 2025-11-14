@@ -32,8 +32,8 @@ services:
       - --https-certificate-key-file=/opt/keycloak/certs/server.key
 
     environment:
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
 
     depends_on:
       - postgres
