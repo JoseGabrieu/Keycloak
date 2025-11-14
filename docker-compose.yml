@@ -19,14 +19,13 @@ services:
     container_name: keycloak
     restart: always
     command:
-      - start
-      - --https-enabled=true
-      - --https-port=8443
-      - --https-certificate-file=/certs/server.crt
-      - --https-certificate-key-file=/certs/server.key
+      - start-dev
+      - --http-enabled=true
+      - --http-port=8080
       - --hostname-strict=false
       - --hostname-strict-https=false
-      - --hostname=$(curl -s ifconfig.me)
+      - --hostname=${KEYCLOAK_HOSTNAME}
+      - --hostname-url=http://${KEYCLOAK_HOSTNAME}:8080
       - --db=postgres
       - --db-username=keycloak
       - --db-password=keycloak123
@@ -35,17 +34,15 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+    depends_on:
+      - postgres
     ports:
-      - "8443:8443"
-    volumes:
-      - /opt/keycloak/certs:/certs
-      - keycloak_data:/opt/keycloak/data
+      - "8080:8080"
     networks:
       - keycloak_net
 
 volumes:
   postgres_data:
-  keycloak_data:
 
 networks:
   keycloak_net:
