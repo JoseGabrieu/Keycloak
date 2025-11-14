@@ -24,8 +24,7 @@ services:
       - --http-port=8080
       - --hostname-strict=false
       - --hostname-strict-https=false
-      - --hostname=${KEYCLOAK_HOSTNAME_URL}
-      - --hostname-url=${KEYCLOAK_HOSTNAME_URL}:8080
+      - --hostname-url=http://${KEYCLOAK_HOSTNAME}:8080
       - --db=postgres
       - --db-username=keycloak
       - --db-password=keycloak123
