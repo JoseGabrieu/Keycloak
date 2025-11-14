@@ -20,17 +20,17 @@ services:
     restart: always
     command:
       - start-dev
-      - --http-enabled=true
-      - --http-port=8080
       - --hostname-strict=false
       - --hostname-strict-https=false
+      - --http-enabled=true
+      - --http-port=8080
       - --hostname=${KEYCLOAK_HOSTNAME}
-      - --hostname-url=http://${KEYCLOAK_HOSTNAME}:8080
       - --db=postgres
       - --db-username=keycloak
       - --db-password=keycloak123
       - --db-url-host=postgres
       - --db-schema=public
+
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
