@@ -19,14 +19,12 @@ services:
     container_name: keycloak
     restart: always
     command:
-      - start
-      - --hostname-strict=false
-      - --hostname-strict-https=false
-      - --proxy=edge
+      - start-dev
       - --http-enabled=true
       - --http-port=8080
-      - --hostname=http://98.95.40.70
-      - --hostname-url=http://98.95.40.70:8080
+      - --hostname-strict=false
+      - --hostname-strict-https=false
+      - --hostname=98.95.40.70
       - --db=postgres
       - --db-username=keycloak
       - --db-password=keycloak123
