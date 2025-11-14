@@ -18,26 +18,30 @@ services:
     image: quay.io/keycloak/keycloak:24.0.2
     container_name: keycloak
     restart: always
+
     command:
       - start-dev
       - --hostname-strict=false
       - --hostname-strict-https=false
-      - --http-enabled=true
-      - --http-port=8080
       - --hostname=${KEYCLOAK_HOSTNAME}
-      - --db=postgres
-      - --db-username=keycloak
-      - --db-password=keycloak123
-      - --db-url-host=postgres
-      - --db-schema=public
+      - --https-port=8443
+      - --https-certificate-file=/opt/keycloak/certs/server.crt
+      - --https-certificate-key-file=/opt/keycloak/certs/server.key
 
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+
     depends_on:
       - postgres
+
     ports:
-      - "8080:8080"
+      - "8080:8080"   # HTTP
+      - "8443:8443"   # HTTPS
+
+    volumes:
+      - /opt/keycloak/certs:/opt/keycloak/certs:ro
+
     networks:
       - keycloak_net
 
