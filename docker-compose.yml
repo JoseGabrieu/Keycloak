@@ -20,11 +20,13 @@ services:
     restart: always
     command:
       - start
-      - --http-enabled=true
-      - --http-port=8080
       - --hostname-strict=false
       - --hostname-strict-https=false
-      - --hostname-url=http://${KEYCLOAK_HOSTNAME}:8080
+      - --proxy=edge
+      - --http-enabled=true
+      - --http-port=8080
+      - --hostname=http://98.95.40.70
+      - --hostname-url=http://98.95.40.70:8080
       - --db=postgres
       - --db-username=keycloak
       - --db-password=keycloak123
