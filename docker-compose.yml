@@ -43,6 +43,7 @@ services:
     networks:
       - keycloak_net
 
+
 volumes:
   postgres_data:
   keycloak_data:
