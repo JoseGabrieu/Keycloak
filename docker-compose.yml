@@ -18,6 +18,9 @@ services:
       KC_LOG_LEVEL: INFO
     ports:
       - "8080:8080" # Map host port 8080 to container port 8080
+    volumes:
+      - /opt/keycloak/certs:/certs
+      - keycloak_data:/opt/keycloak/data
     depends_on:
       db:
         condition: service_healthy
