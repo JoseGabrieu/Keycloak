@@ -22,13 +22,14 @@ services:
       - start-dev
       - --http-enabled=true
       - --http-port=8080
+      - --hostname=98.95.40.70
       - --hostname-strict=false
       - --hostname-strict-https=false
-      - --hostname=98.95.40.70
+      - --hostname-http-request-headers=none
       - --db=postgres
+      - --db-url-host=postgres
       - --db-username=keycloak
       - --db-password=keycloak123
-      - --db-url-host=postgres
       - --db-schema=public
     environment:
       KEYCLOAK_ADMIN: admin
